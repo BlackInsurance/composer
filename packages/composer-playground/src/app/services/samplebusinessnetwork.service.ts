@@ -92,6 +92,7 @@ export class SampleBusinessNetworkService {
 
         if (credentials) {
             networkAdmin['certificate'] = credentials.certificate;
+            networkAdmin['privateKey'] = credentials.privateKey || '';
         } else if (networkSecret) {
             networkAdmin['enrollmentSecret'] = networkSecret;
         } else {

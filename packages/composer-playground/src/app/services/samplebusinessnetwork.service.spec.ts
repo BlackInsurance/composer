@@ -294,12 +294,11 @@ describe('SampleBusinessNetworkService', () => {
 
             adminMock.install.should.have.been.called;
             adminMock.start.should.have.been.called;
-            adminMock.start.should.have.been.calledWith('my-network', sinon.match.string, {
-                networkAdmins: [{
-                    userName: 'myUserId',
-                    certificate: 'myCert'
-                }]
-            });
+            adminMock.start.should.have.been.calledWith('my-network', sinon.match.string, sinon.match.has('networkAdmins'));
+
+            let startArgs = adminMock.start.getCall(0).args[2];
+            startArgs.should.have.deep.property('networkAdmins[0].userName', 'myUserId');
+            startArgs.should.have.deep.property('networkAdmins[0].certificate', 'myCert');
 
             adminMock.importCard.should.have.been.calledWith('myCardName', createdCard);
 

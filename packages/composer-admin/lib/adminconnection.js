@@ -471,7 +471,10 @@ class AdminConnection {
                             newCard = new IdCard(metadata,connectionProfile);
                         } else {
                             newCard = new IdCard(metadata,connectionProfile);
-                            newCard.setCredentials({ certificate : networkAdmin.certificate });
+                            newCard.setCredentials({
+                                certificate : networkAdmin.certificate,
+                                privateKey: networkAdmin.privateKey || null
+                            });
                         }
                         createdCards.set(networkAdmin.userName,newCard);
 
